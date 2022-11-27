@@ -5,12 +5,8 @@ import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list
 import { LoginComponent } from './components/user/login/login.component';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 
+
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'recipes',
-    pathMatch: 'full'
-  },
   {
     path: 'recipes',
     component: RecipeListComponent,
@@ -27,7 +23,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'user',
+    path: 'profile',
     component: UserEditComponent
   }
 ];
