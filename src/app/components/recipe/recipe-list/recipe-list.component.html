@@ -1,3 +1,22 @@
-<p>
-  recipe-list works!
-</p>
+<div class="row">
+  <div class="col-xs-12 header">
+    <h2>{{ title }}</h2>
+    <button class="btn btn-primary" (click)="onAddRecipe()" *ngIf="isMyRecipes">Add recipe</button>
+  </div>
+  <div *ngFor="let recipe of recipes" class="col-lg-3 col-md-4 col-sm-6">
+    <div class="card">
+      <img class="card-img-top img-responsive card-image" src="{{ recipe.photoUrl }}" alt="{{ recipe.name }}">
+      <div class="card-body">
+        <h3 class="card-title">{{ recipe.name }}</h3>
+        <hr>
+        <div class="card-description-ellipsis">
+          <p class="card-text">{{ recipe.description }}</p>
+        </div>
+        <hr>
+        <div class="card-button">
+          <button class="btn btn-primary">Show more</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
