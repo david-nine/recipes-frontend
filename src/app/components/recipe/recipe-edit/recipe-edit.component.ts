@@ -59,8 +59,6 @@ export class RecipeEditComponent extends BaseFormComponent implements OnInit {
     } else {
       const recipe = this.formGroup.value as RecipeDTO;
       recipe.id = this.params.recipe;
-      const ingredients = recipe.ingredients;
-      //delete recipe.ingredients;
       this.recipeService.put(this.params['recipe'], recipe)
         .subscribe(data => {
           this.router.navigate(['../'], {relativeTo: this.route});

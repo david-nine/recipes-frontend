@@ -32,10 +32,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.route.data.pipe(
       takeUntil(this.ngUnsubscribe)
     ).subscribe(data => this.routeDataResolve(data));
-
-    this.recipesService.list().subscribe((data: { recipes: RecipeDTO[] }) => {
-      this.recipes = data.recipes;
-    });
   }
 
   ngOnDestroy(): void {
@@ -45,6 +41,16 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   private routeDataResolve(data: Data) {
     this.title = data['title'];
     this.isMyRecipes = this.title === RecipesPageType.MY_RECIPES;
+
+    if (this.isMyRecipes) {
+      this.recipesService.listMyRecipes().subscribe((dto: { recipes: RecipeDTO[] }) => {
+        this.recipes = dto.recipes;
+      });
+    } else {
+      this.recipesService.list().subscribe((dto: { recipes: RecipeDTO[] }) => {
+        this.recipes = dto.recipes;
+      });
+    }
   }
 
   onAddRecipe() {

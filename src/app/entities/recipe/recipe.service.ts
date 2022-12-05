@@ -11,4 +11,8 @@ export class RecipeService extends BaseEntityService<RecipeDTO> {
   ) {
     super(http, 'recipes');
   }
+
+  public listMyRecipes() {
+    return this.http.get<{ recipes: RecipeDTO[] }>('myRecipes');
+  }
 }
