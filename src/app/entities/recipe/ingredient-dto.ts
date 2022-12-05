@@ -6,12 +6,12 @@ export interface IngredientDTO {
 }
 
 export enum UnitType {
-  LT = 'l',
-  ML = 'ml',
-  GR = 'g',
-  KG = 'kg',
-  CP = 'cup',
-  SS = 'souSpoon',
-  CC = 'teaspoon',
-  QT = 'quantity'
+  LT = 'Liters',
+  ML = 'Milliliters',
+  GR = 'Grams',
+  KG = 'Kilograms',
+  CP = 'Cup',
+  SS = 'Sou Spoon',
+  CC = 'Teaspoon',
+  QT = 'Quantity'
 }

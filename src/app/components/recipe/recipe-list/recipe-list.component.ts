@@ -4,6 +4,7 @@ import {ActivatedRoute, Data, Router} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {RecipeCardDTO} from '../../../entities/recipe/recipe-card-dto';
+import {RecipesPageType} from '../../../entities/common/recipes-page-type';
 
 @Component({
   selector: 'app-recipe-list',
@@ -30,10 +31,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.route.data.pipe(
       takeUntil(this.ngUnsubscribe)
     ).subscribe(data => this.routeDataResolve(data));
-
-    this.route.url.subscribe(url => {
-      this.isMyRecipes = url[0].path === 'myRecipes';
-    });
 
     this.recipesService.list().subscribe(recipes => {
       this.recipes = [
@@ -73,9 +70,14 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   private routeDataResolve(data: Data) {
     this.title = data['title'];
+    this.isMyRecipes = this.title === RecipesPageType.MY_RECIPES;
   }
 
   onAddRecipe() {
-    this.router.navigate([1], { relativeTo: this.route });
+    this.router.navigate(['myRecipes', 'new']);
+  }
+
+  onShowDetails(id: number) {
+    this.router.navigate([id], {relativeTo: this.route});
   }
 }

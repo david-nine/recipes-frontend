@@ -1,68 +1,107 @@
-<form class="row d-flex justify-content-center" [formGroup]="formGroup">
-  <div class="col-xs-3"></div>
-  <div class="col-xs-6">
-    <div class="form-group">
-      <label for="login">Name</label>
-      <input type="text" name="login" id="login" class="form-control" formControlName="name">
-      <app-control-errors
-        [errors]="{required: 'This field is required'}"
-        [control]="formGroup.controls['name']"
-      ></app-control-errors>
-    </div>
-    <div class="form-group">
-      <label for="description">Description</label>
-      <input type="description" name="description" id="description" class="form-control" formControlName="description">
-      <app-control-errors
-        [errors]="{
+<form class="row" [formGroup]="formGroup">
+  <div class="form-group col-xs-12 col-md-6">
+    <label for="login">Name</label>
+    <input type="text" name="login" id="login" class="form-control" formControlName="name">
+    <app-control-errors
+      [errors]="{required: 'This field is required'}"
+      [control]="formGroup.controls['name']"
+    ></app-control-errors>
+  </div>
+  <div class="form-group col-xs-12 col-md-6">
+    <label for="description">Description</label>
+    <input type="text" name="description" id="description" class="form-control" formControlName="description">
+    <app-control-errors
+      [errors]="{
           required: 'This field is required'
         }"
-        [control]="formGroup.controls['description']"
-      ></app-control-errors>
-    </div>
-    <div class="form-group">
-      <label for="howToMake">How to make</label>
-      <input type="howToMake" name="howToMake" id="howToMake" class="form-control" formControlName="howToMake">
-      <app-control-errors
-        [errors]="{
+      [control]="formGroup.controls['description']"
+    ></app-control-errors>
+  </div>
+  <div class="form-group col-xs-12 col-md-6">
+    <label for="revenue">Revenue</label>
+    <input type="number" name="revenue" id="revenue" class="form-control" formControlName="revenue">
+    <app-control-errors
+      [errors]="{
           required: 'This field is required'
         }"
-        [control]="formGroup.controls['howToMake']"
-      ></app-control-errors>
-    </div>
-    <div class="form-group">
-      <label for="cookTIme">Cook time</label>
-      <input type="cookTIme" name="cookTIme" id="cookTIme" class="form-control" formControlName="cookTIme">
-      <app-control-errors
-        [errors]="{
+      [control]="formGroup.controls['revenue']"
+    ></app-control-errors>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="cookTIme">Cook time</label>
+    <input type="text" name="cookTIme" id="cookTIme" class="form-control" formControlName="cookTIme">
+    <app-control-errors
+      [errors]="{
           required: 'This field is required'
         }"
-        [control]="formGroup.controls['cookTIme']"
-      ></app-control-errors>
-    </div>
-    <div class="form-group">
-      <label for="revenue">Revenue</label>
-      <input type="revenue" name="revenue" id="revenue" class="form-control" formControlName="revenue">
-      <app-control-errors
-        [errors]="{
+      [control]="formGroup.controls['cookTIme']"
+    ></app-control-errors>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="howToMake">How to make</label>
+    <textarea name="howToMake" id="howToMake" class="form-control" formControlName="howToMake" rows="11"></textarea>
+    <app-control-errors
+      [errors]="{
           required: 'This field is required'
         }"
-        [control]="formGroup.controls['photoUrl']"
-      ></app-control-errors>
-    </div>
-    <div class="form-group">
-      <label for="photoUrl">photoUrl</label>
-      <input type="photoUrl" name="revenue" id="photoUrl" class="form-control" formControlName="photoUrl">
-      <app-control-errors
-        [errors]="{
+      [control]="formGroup.controls['howToMake']"
+    ></app-control-errors>
+  </div>
+  <div class="form-group col-xs-12 col-md-6">
+    <label for="photoUrl">photoUrl</label>
+    <input type="text" name="photoUrl" id="photoUrl" class="form-control d-done" formControlName="photoUrl">
+    <app-control-errors
+      [errors]="{
           required: 'This field is required'
         }"
-        [control]="formGroup.controls['photoUrl']"
-      ></app-control-errors>
+      [control]="formGroup.controls['photoUrl']"
+    ></app-control-errors>
+    <img class="img-responsive" id="recipe-image" *ngIf="formGroup.value['photoUrl']"
+         src="{{ formGroup.value['photoUrl'] }}" alt="recipe">
+  </div>
+  <div class="col-xs-12" formArrayName="ingredients">
+    <div class="row"
+         *ngFor="let ingredientControl of ingredients.controls; let i = index"
+         [formGroupName]="i.toString()"
+         style="margin-top: 10px">
+      <div class="col-xs-6">
+        <input type="text"
+               class="form-control"
+               formControlName="name">
+      </div>
+      <div class="col-xs-2">
+        <input type="number"
+               class="form-control"
+               formControlName="quantity">
+      </div>
+      <div class="col-xs-2">
+        <select class="form-control" formControlName="unit">
+          <option [value]="options[0][0]">{{ options[0][1] }}</option>
+          <option [value]="options[1][0]">{{ options[1][1] }}</option>
+          <option [value]="options[2][0]">{{ options[2][1] }}</option>
+          <option [value]="options[3][0]">{{ options[3][1] }}</option>
+          <option [value]="options[4][0]">{{ options[4][1] }}</option>
+          <option [value]="options[5][0]">{{ options[5][1] }}</option>
+          <option [value]="options[6][0]">{{ options[6][1] }}</option>
+          <option [value]="options[7][0]">{{ options[7][1] }}</option>
+        </select>
+      </div>
+      <div class="col-xs-1">
+        <button class="btn btn-danger" (click)="onRemoveIngredient(i)">X</button>
+      </div>
     </div>
-    <div>
-      <button type="button" class="btn btn-primary" (click)="onSubmit()">Log in</button>
+    <div class="row" style="margin-top : 10px;">
+      <div class="col-xs-12">
+        <button type="button"
+                (click)="onAddIngredient()"
+                class="btn btn-success">Add ingredient
+        </button>
+      </div>
     </div>
   </div>
-  <div class="col-xs-3"></div>
+  <div class="col-xs-12" style="margin-top : 10px;">
+    <button type="button" class="btn btn-primary" (click)="onSubmit()">Save</button>
+    <button *ngIf="!isNew() && isMyRecipe()" type="button" class="btn btn-danger" style="margin-left: 1rem" (click)="onDelete()">Delete</button>
+  </div>
 </form>
 

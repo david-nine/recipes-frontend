@@ -4,16 +4,20 @@ import {RecipeEditComponent} from './components/recipe/recipe-edit/recipe-edit.c
 import {RecipeListComponent} from './components/recipe/recipe-list/recipe-list.component';
 import {LoginComponent} from './components/user/login/login.component';
 import {UserEditComponent} from './components/user/user-edit/user-edit.component';
+import {RecipesPageType} from './entities/common/recipes-page-type';
 
 
 const routes: Routes = [
   {
     path: 'recipes',
-    component: RecipeListComponent,
-    data: {
-      title: 'Recipes'
-    },
     children: [
+      {
+        path: '',
+        component: RecipeListComponent,
+        data: {
+          title: RecipesPageType.ALL_RECIPES
+        }
+      },
       {
         path: ':recipe',
         component: RecipeEditComponent
@@ -22,16 +26,21 @@ const routes: Routes = [
   },
   {
     path: 'myRecipes',
-    component: RecipeListComponent,
-    pathMatch: 'full',
     children: [
+      {
+        path: '',
+        component: RecipeListComponent,
+        data: {
+          title: RecipesPageType.MY_RECIPES
+        }
+      },
       {
         path: ':recipe',
         component: RecipeEditComponent
       }
     ],
     data: {
-      title: 'My recipes'
+      title: RecipesPageType.MY_RECIPES
     }
   },
   {

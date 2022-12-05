@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {RecipeService} from './recipe/recipe.service';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthService} from './user/auth.service';
+import {UserService} from './user/user-service';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import {AuthService} from './user/auth.service';
   ],
   providers: [
     RecipeService,
-    AuthService
+    AuthService,
+    UserService
   ],
 })
 export class EntitiesModule {

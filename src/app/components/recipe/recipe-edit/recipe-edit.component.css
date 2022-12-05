@@ -1,0 +1,16 @@
+input.ng-invalid.ng-dirty,
+textarea.ng-invalid.ng-dirty,
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+textarea {
+  resize: vertical;
+}
+
+#recipe-image {
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-top: 2%;
+}

@@ -1,3 +1,52 @@
-<p>
-  user-edit works!
-</p>
+<form class="row main-row" [formGroup]="formGroup">
+  <div class="col-xs-12 col-sm-6">
+    <div class="form-group col-xs-12">
+      <label for="login">Login</label>
+      <input type="text" name="login" id="login" class="form-control" formControlName="login">
+      <app-control-errors
+        [errors]="{required: 'This field is required'}"
+        [control]="formGroup.controls['login']"
+      ></app-control-errors>
+    </div>
+    <div class="form-group col-xs-12">
+      <label for="email">Email</label>
+      <input type="text" name="email" id="email" class="form-control" formControlName="email">
+      <app-control-errors
+        [errors]="{
+          required: 'This field is required',
+          email: 'Invalid email'
+        }"
+        [control]="formGroup.controls['email']"
+      ></app-control-errors>
+    </div>
+    <div class="form-group col-xs-12">
+      <label>Password</label>
+      <input type="password" name="password" class="form-control" formControlName="password">
+      <app-control-errors
+        [errors]="{required: 'This field is required'}"
+        [control]="formGroup.controls['password']"
+      ></app-control-errors>
+    </div>
+    <div class="form-group col-xs-12">
+      <label for="confirmPassword">Confirm password</label>
+      <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
+             formControlName="confirmPassword">
+      <app-control-errors
+        [errors]="{required: 'This field is required'}"
+        [control]="formGroup.controls['confirmPassword']"
+      ></app-control-errors>
+    </div>
+    <div class="form-group col-xs-12">
+      <label for="photoUrl">Photo url</label>
+      <input type="text" name="photoUrl" id="photoUrl" class="form-control" formControlName="photoUrl">
+      <app-control-errors
+        [errors]="{required: 'This field is required'}"
+        [control]="formGroup.controls['photoUrl']"
+      ></app-control-errors>
+    </div>
+    <div class="col-xs-12">
+      <button type="button" class="btn btn-primary" (click)="onSubmit()">Save</button>
+    </div>
+  </div>
+</form>
+
