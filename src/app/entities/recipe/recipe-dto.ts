@@ -6,8 +6,8 @@ export interface RecipeDTO {
   name: string;
   description: string;
   howToMake: string;
-  cookTIme: number;
+  cookTime: number;
   photoUrl: string;
-  revenue: string;
+  revenue?: number;
   ingredients: IngredientDTO[];
 }

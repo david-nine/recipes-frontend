@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Subject} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -32,13 +33,7 @@ export abstract class BaseEntityService<T> {
   }
 
   post(dto: T) {
-    //return this.http.post(`${this.entityName}/0`, dto).pipe(
-    //  catchError(err => {
-    //    console.log(err);
-    //    throw err;
-    //  })
-    //);
-    return this.fakeObservable();
+    return this.http.post(`${this.entityName}/0`, dto);
   }
 
   put(id: string, dto: T) {
@@ -64,13 +59,7 @@ export abstract class BaseEntityService<T> {
   }
 
   list() {
-    //return this.http.get(`${this.entityName}`).pipe(
-    //  catchError(err => {
-    //    console.log(err);
-    //    throw err;
-    //  })
-    //);
-    return this.fakeObservable();
+    return this.http.get(`${this.entityName}`);
   }
 
 }

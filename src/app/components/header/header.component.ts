@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../../entities/user/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,8 @@ export class HeaderComponent implements OnInit {
   collapsed = true;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
   }
 
@@ -21,4 +23,12 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([feature]);
   }
 
+  isLogged() {
+    return this.authService.isLogged();
+  }
+
+  onLogOut() {
+    this.authService.logOut();
+    this.router.navigate(['recipes']);
+  }
 }

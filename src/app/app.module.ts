@@ -14,6 +14,7 @@ import {AuthInterceptorService} from './shared/services/auth-interceptor.service
 import {ReactiveFormsModule} from '@angular/forms';
 import {ControlErrorsModule} from './shared/components/control-errors/control-errors.module';
 import {EntitiesModule} from './entities/entities.module';
+import {AuthService} from './entities/user/auth.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {EntitiesModule} from './entities/entities.module';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
-      multi: true
+      multi: true,
+      deps: [AuthService]
     },
   ],
   bootstrap: [AppComponent]

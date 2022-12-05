@@ -90,7 +90,7 @@
         <button class="btn btn-danger" (click)="onRemoveIngredient(i)">X</button>
       </div>
     </div>
-    <div class="row" style="margin-top : 10px;">
+    <div class="row" style="margin-top : 10px;" *ngIf="isMyRecipe()">
       <div class="col-xs-12">
         <button type="button"
                 (click)="onAddIngredient()"
@@ -100,7 +100,7 @@
     </div>
   </div>
   <div class="col-xs-12" style="margin-top : 10px;">
-    <button type="button" class="btn btn-primary" (click)="onSubmit()">Save</button>
+    <button *ngIf="isMyRecipe()" type="button" class="btn btn-primary" (click)="onSubmit()">Save</button>
     <button *ngIf="!isNew() && isMyRecipe()" type="button" class="btn btn-danger" style="margin-left: 1rem" (click)="onDelete()">Delete</button>
   </div>
 </form>

@@ -1,30 +1,36 @@
 import { Time } from '@angular/common';
 import { Injectable } from '@angular/core';
 import {Observable, Subject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {tap} from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
-  private currentUserData;
-  private token;
+  private currentUserId: number;
+  private token: string;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  public logIn(user: string, password: string): Observable<any> {
-    console.log('user: ' + user + 'password: ' + password);
-    const subject = new Subject();
-    setTimeout( () => subject.next(true), 1000);
-    return subject;
+  public logIn(user: string, password: string): Observable<{accessToken: string, userId: number}> {
+    return this.http.post<{accessToken: string, userId: number}>('login', { login: user, password: password })
+      .pipe(
+        tap(data => {
+          this.currentUserId = data.userId;
+          this.token = data.accessToken;
+        })
+      );
   }
 
   public logOut() {
-
+    this.token = null;
+    this.currentUserId = null;
   }
 
   public isLogged() {
-    return false;
+    return !!this.barerToken;
   }
 
   get barerToken(): string {

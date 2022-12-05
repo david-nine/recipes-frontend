@@ -1,5 +1,5 @@
-import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import {HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {environment} from 'src/environments/environment';
 
 export class URLInterceptorService implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler) {

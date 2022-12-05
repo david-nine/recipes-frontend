@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 export class LoginComponent extends BaseFormComponent implements OnInit {
 
   loginError: boolean;
-  private currentUserData;
+  private currentUserId;
 
   constructor(
     private authService: AuthService,
@@ -36,7 +36,7 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   onSave() {
     this.loading = true;
     this.authService.logIn(this.formGroup.value[LoginForm.NAME], this.formGroup.value[LoginForm.PASSWORD])
-      .subscribe(() => {
+      .subscribe((data: {accessToken: string, userId: number}) => {
         if (this.authService.isLogged()) {
           this.router.navigate(['myRecipes']);
         } else {
