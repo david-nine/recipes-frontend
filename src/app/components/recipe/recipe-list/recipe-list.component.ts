@@ -33,8 +33,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
       takeUntil(this.ngUnsubscribe)
     ).subscribe(data => this.routeDataResolve(data));
 
-    this.recipesService.list().subscribe((recipes: RecipeDTO[]) => {
-      this.recipes = recipes;
+    this.recipesService.list().subscribe((data: { recipes: RecipeDTO[] }) => {
+      this.recipes = data.recipes;
     });
   }
 

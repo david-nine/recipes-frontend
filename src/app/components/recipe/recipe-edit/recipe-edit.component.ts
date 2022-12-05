@@ -38,7 +38,7 @@ export class RecipeEditComponent extends BaseFormComponent implements OnInit {
       'name': [null, Validators.compose([Validators.required])],
       'description': [null, Validators.compose([Validators.required])],
       'howToMake': [null, Validators.compose([Validators.required])],
-      'cookTIme': [null, Validators.compose([Validators.required])],
+      'cookTime': [null, Validators.compose([Validators.required])],
       'photoUrl': [null, Validators.compose([Validators.required])],
       'revenue': [null, Validators.compose([Validators.required])],
       'ingredients': this.formBuilder.array([]),
@@ -59,6 +59,8 @@ export class RecipeEditComponent extends BaseFormComponent implements OnInit {
     } else {
       const recipe = this.formGroup.value as RecipeDTO;
       recipe.id = this.params.recipe;
+      const ingredients = recipe.ingredients;
+      //delete recipe.ingredients;
       this.recipeService.put(this.params['recipe'], recipe)
         .subscribe(data => {
           this.router.navigate(['../'], {relativeTo: this.route});

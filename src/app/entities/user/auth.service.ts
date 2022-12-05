@@ -1,5 +1,5 @@
-import { Time } from '@angular/common';
-import { Injectable } from '@angular/core';
+import {Time} from '@angular/common';
+import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
@@ -12,10 +12,11 @@ export class AuthService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
-  public logIn(user: string, password: string): Observable<{accessToken: string, userId: number}> {
-    return this.http.post<{accessToken: string, userId: number}>('login', { login: user, password: password })
+  public logIn(user: string, password: string): Observable<{ accessToken: string, userId: number }> {
+    return this.http.post<{ accessToken: string, userId: number }>('login', {login: user, password: password})
       .pipe(
         tap(data => {
           this.currentUserId = data.userId;
@@ -35,6 +36,10 @@ export class AuthService {
 
   get barerToken(): string {
     return this.token;
+  }
+
+  get userId(): number {
+    return this.currentUserId;
   }
 
 }

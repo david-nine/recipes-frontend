@@ -23,6 +23,12 @@ export class UserEditComponent extends BaseFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.isLogged()) {
+      this.userService.get(this.authService.userId.toString())
+        .subscribe(user => {
+          this.formGroup.patchValue(user);
+        });
+    }
   }
 
   getFormGroup() {
@@ -39,7 +45,7 @@ export class UserEditComponent extends BaseFormComponent implements OnInit {
   onSave() {
     const user = this.formGroup.value;
     delete user['confirmPassword'];
-    if (this.authService.isLogged()) {
+    if (this.isLogged()) {
       this.userService.put(this.formGroup.value['id'], this.formGroup.value);
     } else {
       this.userService.post(user).subscribe(data => {
@@ -47,5 +53,9 @@ export class UserEditComponent extends BaseFormComponent implements OnInit {
       });
 
     }
+  }
+
+  isLogged() {
+    return this.authService.isLogged();
   }
 }

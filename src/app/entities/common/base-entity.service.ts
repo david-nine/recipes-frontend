@@ -15,13 +15,12 @@ export abstract class BaseEntityService<T> {
   }
 
   get(id: string) {
-    //return this.http.get(`${this.entityName}/${id}`).pipe(
-    //  catchError(err => {
-    //    console.log(err);
-    //    throw err;
-    //  })
-    //);
-    return this.fakeObservable();
+    return this.http.get(`${this.entityName}/${id}`).pipe(
+      catchError(err => {
+        console.log(err);
+        throw err;
+      })
+    );
   }
 
   private fakeObservable() {
@@ -37,25 +36,21 @@ export abstract class BaseEntityService<T> {
   }
 
   put(id: string, dto: T) {
-    //return this.http.put(`${this.entityName}/${id}`, dto).pipe(
-    //  catchError(err => {
-    //    console.log(err);
-    //    throw err;
-    //  })
-    //);
-    return this.fakeObservable();
-
+    return this.http.put(`${this.entityName}/${id}`, dto).pipe(
+      catchError(err => {
+        console.log(err);
+        throw err;
+      })
+    );
   }
 
   delete(id: string) {
-    //return this.http.delete(`${this.entityName}/${id}`).pipe(
-    //  catchError(err => {
-    //    console.log(err);
-    //    throw err;
-    //  })
-    //);
-    return this.fakeObservable();
-
+    return this.http.delete(`${this.entityName}/${id}`).pipe(
+      catchError(err => {
+        console.log(err);
+        throw err;
+      })
+    );
   }
 
   list() {

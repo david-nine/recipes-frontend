@@ -19,20 +19,26 @@
         [control]="formGroup.controls['email']"
       ></app-control-errors>
     </div>
-    <div class="form-group col-xs-12">
+    <div class="form-group col-xs-12" *ngIf="!isLogged()">
       <label>Password</label>
       <input type="password" name="password" class="form-control" formControlName="password">
       <app-control-errors
-        [errors]="{required: 'This field is required'}"
+        [errors]="{
+          required: 'This field is required',
+          minlength: 'Should be more than 5 characters'
+        }"
         [control]="formGroup.controls['password']"
       ></app-control-errors>
     </div>
-    <div class="form-group col-xs-12">
+    <div class="form-group col-xs-12" *ngIf="!isLogged()">
       <label for="confirmPassword">Confirm password</label>
       <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
              formControlName="confirmPassword">
       <app-control-errors
-        [errors]="{required: 'This field is required'}"
+        [errors]="{
+          required: 'This field is required',
+          minlength: 'Should be more than 5 characters'
+        }"
         [control]="formGroup.controls['confirmPassword']"
       ></app-control-errors>
     </div>
@@ -43,6 +49,9 @@
         [errors]="{required: 'This field is required'}"
         [control]="formGroup.controls['photoUrl']"
       ></app-control-errors>
+    </div>
+    <div class="col-xs-12" *ngIf="formGroup.value['photoUrl']" style="margin-bottom: 1rem;">
+      <img src="{{ formGroup.value['photoUrl'] }}" class="img-responsive" alt="user photo" style="border-radius: 5%;">
     </div>
     <div class="col-xs-12">
       <button type="button" class="btn btn-primary" (click)="onSubmit()">Save</button>
